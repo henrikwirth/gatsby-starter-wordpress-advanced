@@ -1,0 +1,14 @@
+{
+  "name": "guide-to-gatsby-starter-wordpress-advanced",
+  "version": "1.0.0",
+  "description": "Tutorial, explaining how to work with WordPress and Gatsby.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dev-to-git": "^1.4.1"
+  }
+}

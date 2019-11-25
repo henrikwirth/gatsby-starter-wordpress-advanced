@@ -1,0 +1,6 @@
+# Editor configuration, see http://editorconfig.org
+root = true
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
