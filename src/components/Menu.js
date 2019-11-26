@@ -4,18 +4,23 @@ import { StaticQuery, graphql } from "gatsby"
 import MenuItem from "./MenuItem"
 
 /**
- * Get all primary menuItems and the sites url.
+ * Define MenuItem fragment and get all primary menu items.
  */
 const MENU_QUERY = graphql`
+
+    fragment MenuItem on WPGraphQL_MenuItem {
+        id
+        label
+        url
+        title
+        target
+    }
+
     query GETMAINMENU {
         wpgraphql {
             menuItems(where: {location: PRIMARY}) {
                 nodes {
-                    id
-                    label
-                    url
-                    title
-                    target
+                    ...MenuItem
                 }
             }
             generalSettings {
@@ -23,7 +28,6 @@ const MENU_QUERY = graphql`
             }
         }
     }
-
 `
 
 const Menu = () => {
@@ -36,7 +40,7 @@ const Menu = () => {
           const wordPressUrl = data.wpgraphql.generalSettings.url
 
           return (
-            <div style={{marginBottom: '20px'}}>
+            <div style={{ marginBottom: "20px" }}>
               {
                 menuItems &&
                 menuItems.map((menuItem) => (
