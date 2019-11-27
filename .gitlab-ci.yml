@@ -1,0 +1,15 @@
+image: node:12.13.0
+
+pages:
+  script:
+    - npm install
+    - npm install gatsby-cli
+    - ./node_modules/.bin/gatsby build --prefix-paths
+  artifacts:
+    paths:
+      - public
+  cache:
+    paths:
+      - node_modules
+  only:
+    - master

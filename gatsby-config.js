@@ -11,6 +11,7 @@ console.log(`This WordPress Endpoint is used: '${process.env.WORDPRESS_URL}'`)
 
 
 module.exports = {
+  pathPrefix: `${process.env.PATH_PREFIX}`,
   siteMetadata: {
     title: `Gatsby Starter WordPress Advanced`,
     description: `The great Gatsby Starter WordPress Advanced.`,
