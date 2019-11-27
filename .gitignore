@@ -6,7 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 
 .idea
-.env.development
+
+# dotenv environment variable files
+.env*
+!.env.development.example
 
 # Runtime data
 pids
@@ -53,9 +56,6 @@ typings/
 
 # Output of 'npm pack'
 *.tgz
-
-# dotenv environment variable files
-.env*
 
 # gatsby files
 .cache/
