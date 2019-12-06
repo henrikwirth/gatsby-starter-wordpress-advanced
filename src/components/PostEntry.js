@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
-import Image from "./Image"
 import { blogURI } from "../../globals"
+import FluidImage from "./FluidImage"
 
 const PostEntry = ({ post }) => {
 
@@ -12,7 +12,7 @@ const PostEntry = ({ post }) => {
       <header>
         <Link to={`${blogURI}/${uri}/`}>
           <h2 style={{ marginBottom: "5px" }}>{title}</h2>
-          <Image image={featuredImage} style={{ margin: 0 }}/>
+          <FluidImage image={featuredImage} style={{ margin: 0 }}/>
         </Link>
 
       </header>

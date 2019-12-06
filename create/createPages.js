@@ -1,6 +1,12 @@
 const pageTemplate = require.resolve("../src/templates/page/index.js")
 
+const {fluidImageFragment} = require("../src/templates/fragments")
+const {pageTemplateFragment} = require("../src/templates/page/data")
+
 const GET_PAGES = `
+    ${fluidImageFragment()}
+    ${pageTemplateFragment()}
+    
     query GET_PAGES($first:Int $after:String) {
         wpgraphql {
             pages(
@@ -16,12 +22,7 @@ const GET_PAGES = `
                     endCursor
                 }
                 nodes {                
-                    id
-                    title
-                    pageId
-                    content
-                    uri
-                    isFrontPage
+                  ...PageTemplateFragment
                 }
             }
         }
