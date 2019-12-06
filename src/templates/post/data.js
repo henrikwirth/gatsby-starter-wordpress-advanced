@@ -6,7 +6,15 @@ const PostTemplateFragment = `
     content
     link
     featuredImage {
-      sourceUrl
+        sourceUrl
+        altText
+        imageFile {
+            childImageSharp {
+               fluid(maxHeight: 400, maxWidth: 800, quality: 90, cropFocus: CENTER) {
+                  ...GatsbyImageSharpFluid_tracedSVG
+               }
+            }
+        }
     }
     categories {
       nodes {
@@ -40,7 +48,15 @@ const BlogPreviewFragment = `
     excerpt
     content
     featuredImage {
-      sourceUrl
+        sourceUrl
+        altText
+        imageFile {
+            childImageSharp {
+               fluid(maxHeight: 400, maxWidth: 800, quality: 90, cropFocus: CENTER) {
+                  ...GatsbyImageSharpFluid_tracedSVG
+               }
+            }
+        }
     }
     author {
       name

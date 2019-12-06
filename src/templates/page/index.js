@@ -2,19 +2,19 @@ import React from "react"
 
 import Layout from "../../components/Layout"
 import SEO from "../../components/SEO"
-import FluidImage from "../../components/FluidImage"
+// import FluidImage from "../../components/FluidImage"
 
 
 const Page = ({ pageContext }) => {
   const {
-    page: { id, postId, title, content, excerpt, featuredImage },
+    page: { title, content, featuredImage },
   } = pageContext;
 
   return (
     <Layout>
       <SEO title={title} />
 
-      <FluidImage image={featuredImage} style={{marginBottom: '15px'}} />
+      {/*<FluidImage image={featuredImage} style={{marginBottom: '15px'}} />*/}
       {/*<FluidImage image={null}  />*/}
 
 
