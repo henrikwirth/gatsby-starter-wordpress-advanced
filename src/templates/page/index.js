@@ -1,7 +1,7 @@
-import React  from "react"
+import React from "react"
 
-import Layout from "../../components/layout"
-import SEO from "../../components/seo"
+import Layout from "../../components/Layout"
+import SEO from "../../components/SEO"
 import FluidImage from "../../components/FluidImage"
 
 
@@ -9,8 +9,6 @@ const Page = ({ pageContext }) => {
   const {
     page: { id, postId, title, content, excerpt, featuredImage },
   } = pageContext;
-
-  console.log(featuredImage)
 
   return (
     <Layout>
