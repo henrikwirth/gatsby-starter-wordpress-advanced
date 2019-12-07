@@ -1,14 +1,11 @@
-
-module.exports.fluidImageFragment = () => {
-  return `
+const FluidImageFragment = `
     fragment GatsbyImageSharpFluid_tracedSVG on ImageSharpFluid {
-      tracedSVG
-      aspectRatio
-      src
-      srcSet
-      sizes
+        tracedSVG
+        aspectRatio
+        src
+        srcSet
+        sizes
     }
-  `
-}
+`
 
-// module.exports.fluidImageFragment = fluidImageFragment
+module.exports.FluidImageFragment = FluidImageFragment

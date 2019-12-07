@@ -3,7 +3,7 @@ import GatsbyImage from "gatsby-image"
 import { graphql, useStaticQuery } from "gatsby"
 
 
-const FluidImage = ({image, withFallback = false, ...props}) => {
+const FluidImage = ({ image, withFallback = false, ...props }) => {
   const data = useStaticQuery(graphql`
       query {
           fallbackImage: file(relativePath: { eq: "fallback.svg" }) {
@@ -19,7 +19,7 @@ const FluidImage = ({image, withFallback = false, ...props}) => {
     return withFallback ? <img src={data.fallBackImage.publicURL} alt={"Fallback"} {...props}/> : null
   }
 
-  if(image && image.imageFile) {
+  if (image && image.imageFile) {
     return <GatsbyImage fluid={image.imageFile.childImageSharp.fluid} alt={image.altText} {...props}/>
   }
 
