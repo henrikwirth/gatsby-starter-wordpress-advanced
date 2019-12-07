@@ -4,7 +4,7 @@ const {
   BlogPreviewFragment,
 } = require("../src/templates/post/data.js")
 
-const {fluidImageFragment} = require("../src/templates/fragments")
+const {FluidImageFragment} = require("../src/templates/fragments")
 
 const { blogURI } = require("../globals")
 
@@ -13,7 +13,7 @@ const blogTemplate = require.resolve("../src/templates/post/blog.js")
 
 const GET_POSTS = `
     # Here we make use of the imported fragments which are referenced above
-    ${fluidImageFragment()}
+    ${FluidImageFragment}
     ${PostTemplateFragment}
     ${BlogPreviewFragment}
 
