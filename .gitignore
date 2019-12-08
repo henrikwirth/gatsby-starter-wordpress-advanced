@@ -7,6 +7,8 @@ yarn-error.log*
 
 .idea
 
+.template-cache
+
 # dotenv environment variable files
 .env*
 !.env.development.example

@@ -17,6 +17,8 @@
     "gatsby-source-graphql": "^2.1.23",
     "gatsby-transformer-sharp": "^2.3.3",
     "glob": "^7.1.6",
+    "lodash.isempty": "^4.4.0",
+    "lodash.uniqby": "^4.7.0",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -35,7 +37,7 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "clean": "gatsby clean && rm -rf .template-cache",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "type-check": "tsc --noEmit"
   }
