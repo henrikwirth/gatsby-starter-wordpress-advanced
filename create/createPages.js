@@ -1,11 +1,13 @@
+const { getAllLayouts } = require("./utils")
+
 const pageTemplate = require.resolve("../src/templates/page/index.js")
 
-const {FluidImageFragment} = require("../src/templates/fragments")
-const {PageTemplateFragment} = require("../src/templates/page/data")
+const { FluidImageFragment } = require("../src/templates/fragments")
+const { PageTemplateFragment } = require("../src/templates/page/data")
 
-const GET_PAGES = `
+const GET_PAGES = (layouts) => `
     ${FluidImageFragment}
-    ${PageTemplateFragment}
+    ${PageTemplateFragment(layouts)}
     
     query GET_PAGES($first:Int $after:String) {
         wpgraphql {
@@ -41,6 +43,9 @@ const itemsPerPage = 10
  */
 module.exports = async ({ actions, graphql, reporter }, options) => {
 
+  const layouts = getAllLayouts()
+
+
   /**
    * This is the method from Gatsby that we're going
    * to use to create pages in our static site.
@@ -59,7 +64,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
     /**
      * Fetch pages using the GET_PAGES query and the variables passed in.
      */
-    await graphql(GET_PAGES, variables).then(({ data }) => {
+    await graphql(GET_PAGES(layouts), variables).then(({ data }) => {
       /**
        * Extract the data from the GraphQL query results
        */
@@ -111,8 +116,8 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
        * If the page is the front page, the page path should not be the uri,
        * but the root path '/'.
        */
-      if(page.isFrontPage) {
-        pagePath = '/'
+      if (page.isFrontPage) {
+        pagePath = "/"
       }
 
       createPage({

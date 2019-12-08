@@ -7,6 +7,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "gatsby": "^2.17.11",
+    "gatsby-cli": "^2.8.16",
     "gatsby-image": "^2.2.31",
     "gatsby-plugin-manifest": "^2.2.27",
     "gatsby-plugin-offline": "^3.0.19",
@@ -15,6 +16,7 @@
     "gatsby-source-filesystem": "^2.1.36",
     "gatsby-source-graphql": "^2.1.23",
     "gatsby-transformer-sharp": "^2.3.3",
+    "glob": "^7.1.6",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

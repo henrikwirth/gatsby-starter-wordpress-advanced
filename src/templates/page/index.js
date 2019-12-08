@@ -2,22 +2,27 @@ import React from "react"
 
 import Layout from "../../components/Layout"
 import SEO from "../../components/SEO"
-import FluidImage from "../../components/FluidImage"
+import AllLayouts from "../AllLayouts"
 
 
 const Page = ({ pageContext }) => {
   const {
-    page: { title, content, featuredImage },
+    page: { title, pageBuilder },
   } = pageContext
+
+  const layouts = pageBuilder.layouts || []
 
   return (
     <Layout>
       <SEO title={title}/>
-
-      <FluidImage image={featuredImage} style={{ marginBottom: "15px" }}/>
-
       <h1> {title} </h1>
-      <div dangerouslySetInnerHTML={{ __html: content }}/>
+
+      {
+        layouts.map((layout, index) => {
+          return <AllLayouts key={index} componentType={layout.fieldGroupName} componentData={layout} />
+        })
+      }
+
     </Layout>
   )
 }

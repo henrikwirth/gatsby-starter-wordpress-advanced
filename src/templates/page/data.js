@@ -1,4 +1,5 @@
-const PageTemplateFragment = `
+
+const PageTemplateFragment = (layouts) => `
     fragment PageTemplateFragment on WPGraphQL_Page {
         id
         title
@@ -15,6 +16,11 @@ const PageTemplateFragment = `
                         ...GatsbyImageSharpFluid_tracedSVG
                     }
                 }
+            }
+        }
+        pageBuilder {
+            layouts {
+                ${layouts}
             }
         }
     }
