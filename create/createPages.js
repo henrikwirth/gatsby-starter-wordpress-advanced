@@ -150,8 +150,8 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
          */
         mappedLayouts = UniqueLayouts.map((layout) => {
           return {
-            dataName: layout.fieldGroupName,
-            name: layoutMapping[layout.fieldGroupName],
+            layoutType: layout.fieldGroupName,
+            componentName: layoutMapping[layout.fieldGroupName],
             filePath: filePathToComponents + layoutMapping[layout.fieldGroupName],
           }
         })

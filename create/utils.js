@@ -15,6 +15,15 @@ module.exports.getAllLayoutsData = () => {
   return allLayoutsString
 }
 
+/**
+ * Creates files based on a template string.
+ *
+ * @param {string} templateCacheFolderPath - Path where the temporary files should be saved.
+ * @param {string} templatePath - Path to the file holding the template string.
+ * @param {string} templateName - Name of the temporary created file.
+ * @param {object[]} imports - An array of objects, that define the layoutType, componentName and filePath.
+ * @returns {Promise<>}
+ */
 module.exports.createTemplate = ({ templateCacheFolderPath, templatePath, templateName, imports }) => {
   return new Promise((resolve) => {
     const fs = require("fs")
@@ -37,8 +46,14 @@ module.exports.createTemplate = ({ templateCacheFolderPath, templatePath, templa
   })
 }
 
-module.exports.createPageWithTemplate = ({createTemplate, templateCacheFolder, pageTemplate, page, pagePath, mappedLayouts, createPage, reporter}) => {
+/**
+ * Creates pages out of the temporary created templates.
+ */
+module.exports.createPageWithTemplate = ({ createTemplate, templateCacheFolder, pageTemplate, page, pagePath, mappedLayouts, createPage, reporter }) => {
 
+  /**
+   * First we create a new template file for each page.
+   */
   createTemplate(
     {
       templateCacheFolderPath: templateCacheFolder,
@@ -47,6 +62,9 @@ module.exports.createPageWithTemplate = ({createTemplate, templateCacheFolder, p
       imports: mappedLayouts,
     }).then(() => {
 
+    /**
+     * Then, we create a gatsby page with the just created template file.
+     */
     createPage({
       path: pagePath,
       component: path.resolve(templateCacheFolder + "/" + "tmp-" + page.uri + ".js"),
@@ -54,6 +72,7 @@ module.exports.createPageWithTemplate = ({createTemplate, templateCacheFolder, p
         page: page,
       },
     })
+
     reporter.info(`page created: ${pagePath}`)
   })
 }

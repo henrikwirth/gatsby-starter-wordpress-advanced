@@ -1,12 +1,13 @@
 module.exports = (imports) => {
   return`
+// This is a temporary generated file. Changes to this file will be overwritten eventually!
 import React from "react"
 
 import Layout from "../src/components/Layout"
 import SEO from "../src/components/SEO"
 
 // Sections
-${imports.map(({ name, filePath }) => `import ${name} from '${filePath}';`).join('\n')}
+${imports.map(({ componentName, filePath }) => `import ${componentName} from '${filePath}';`).join('\n')}
 
 const Page = ({ pageContext }) => {
   const {
@@ -22,10 +23,10 @@ const Page = ({ pageContext }) => {
 
       {
         layouts.map((layout, index) => {
-          ${imports.map(({ name, dataName }) => {
+          ${imports.map(({ componentName, layoutType }) => {
             return `
-              if (layout.fieldGroupName === '${dataName}') {
-                  return <${name} {...layout} key={index} />;
+              if (layout.fieldGroupName === '${layoutType}') {
+                  return <${componentName} {...layout} key={index} />;
               }
             `
           }).join('\n')}
