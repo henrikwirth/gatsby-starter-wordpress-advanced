@@ -49,8 +49,10 @@ const itemsPerPage = 10
  */
 module.exports = async ({ actions, graphql, reporter }, options) => {
 
+  /**
+   * Get all layouts data as a concatenated string
+   */
   const layoutsData = getAllLayoutsData()
-
 
   /**
    * This is the method from Gatsby that we're going

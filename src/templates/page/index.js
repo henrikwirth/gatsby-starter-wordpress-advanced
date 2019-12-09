@@ -2,7 +2,7 @@ import React from "react"
 
 import Layout from "../../components/Layout"
 import SEO from "../../components/SEO"
-import AllLayouts from "../AllLayouts"
+import AllLayouts from "../../components/AllLayouts"
 
 
 const Page = ({ pageContext }) => {
@@ -19,7 +19,7 @@ const Page = ({ pageContext }) => {
 
       {
         layouts.map((layout, index) => {
-          return <AllLayouts key={index} componentType={layout.fieldGroupName} componentData={layout} />
+          return <AllLayouts key={index} layoutData={layout} />
         })
       }
 
