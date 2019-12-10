@@ -172,7 +172,10 @@
         "label_placement": "top",
         "instruction_placement": "label",
         "hide_on_screen": [
-            "the_content"
+            "the_content",
+            "discussion",
+            "comments",
+            "send-trackbacks"
         ],
         "active": true,
         "description": "",
