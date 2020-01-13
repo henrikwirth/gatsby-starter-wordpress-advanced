@@ -1,7 +1,7 @@
 
-module.exports = () => {
+module.exports = (postType) => {
   return `
-      ... on WPGraphQL_Page_Pagebuilder_Layouts_TextBlock {
+      ... on WPGraphQL_${postType}_Pagebuilder_Layouts_TextBlock {
           fieldGroupName
           text
           textColor

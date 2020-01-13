@@ -52,7 +52,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
   /**
    * Get all layouts data as a concatenated string
    */
-  const layoutsData = getAllLayoutsData()
+  const layoutsData = getAllLayoutsData('Page')
 
   /**
    * This is the method from Gatsby that we're going
@@ -151,8 +151,8 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         mappedLayouts = UniqueLayouts.map((layout) => {
           return {
             layoutType: layout.fieldGroupName,
-            componentName: layoutMapping[layout.fieldGroupName],
-            filePath: filePathToComponents + layoutMapping[layout.fieldGroupName],
+            componentName: layoutMapping('page')[layout.fieldGroupName],
+            filePath: filePathToComponents + layoutMapping('page')[layout.fieldGroupName],
           }
         })
       }
@@ -161,7 +161,8 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         createTemplate: createTemplate,
         templateCacheFolder: templateCacheFolder,
         pageTemplate: pageTemplate,
-        page: page,
+        node: page,
+        postType: 'page',
         pagePath: pagePath,
         mappedLayouts: mappedLayouts,
         createPage: createPage,

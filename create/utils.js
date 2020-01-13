@@ -1,6 +1,6 @@
 const path = require("path")
 
-module.exports.getAllLayoutsData = () => {
+module.exports.getAllLayoutsData = (postType) => {
   const glob = require("glob")
 
   let allLayoutsString = ""
@@ -9,7 +9,7 @@ module.exports.getAllLayoutsData = () => {
 
   fileArray.forEach(function(file) {
     let queryString = require(path.resolve(file))
-    allLayoutsString = allLayoutsString + " \n " + queryString()
+    allLayoutsString = allLayoutsString + " \n " + queryString(postType)
   })
 
   return allLayoutsString
@@ -49,7 +49,7 @@ module.exports.createTemplate = ({ templateCacheFolderPath, templatePath, templa
 /**
  * Creates pages out of the temporary created templates.
  */
-module.exports.createPageWithTemplate = ({ createTemplate, templateCacheFolder, pageTemplate, page, pagePath, mappedLayouts, createPage, reporter }) => {
+module.exports.createPageWithTemplate = ({ createTemplate, templateCacheFolder, pageTemplate, node, pagePath, mappedLayouts, createPage, reporter, postType='page' }) => {
 
   /**
    * First we create a new template file for each page.
@@ -58,7 +58,7 @@ module.exports.createPageWithTemplate = ({ createTemplate, templateCacheFolder, 
     {
       templateCacheFolderPath: templateCacheFolder,
       templatePath: pageTemplate,
-      templateName: "tmp-" + page.uri,
+      templateName: "tmp-" + node.uri,
       imports: mappedLayouts,
     }).then(() => {
 
@@ -67,9 +67,9 @@ module.exports.createPageWithTemplate = ({ createTemplate, templateCacheFolder, 
      */
     createPage({
       path: pagePath,
-      component: path.resolve(templateCacheFolder + "/" + "tmp-" + page.uri + ".js"),
+      component: path.resolve(templateCacheFolder + "/" + "tmp-" + node.uri + ".js"),
       context: {
-        page: page,
+        [postType]: node,
       },
     })
 

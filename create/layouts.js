@@ -1,4 +1,4 @@
-module.exports = {
-  page_Pagebuilder_Layouts_Hero: "Hero",
-  page_Pagebuilder_Layouts_TextBlock: "TextBlock",
-}
+module.exports = (postType) => ({
+    [`${postType}_Pagebuilder_Layouts_Hero`]: "Hero",
+    [`${postType}_Pagebuilder_Layouts_TextBlock`]: "TextBlock",
+})

@@ -6,15 +6,26 @@ const {
 
 const {FluidImageFragment} = require("../src/templates/fragments")
 
-const { blogURI } = require("../globals")
 
-const postTemplate = require.resolve("../src/templates/post/index.js")
+const _uniqBy = require("lodash.uniqby")
+const _isEmpty = require("lodash.isempty")
+
+const { getAllLayoutsData, createTemplate, createPageWithTemplate } = require("./utils")
+
+const filePathToComponents = "../src/layouts/"
+const layoutMapping = require("./layouts")
+const templateCacheFolder = ".template-cache"
+const postTemplate = require.resolve("../src/templates/post/template.js")
+
 const blogTemplate = require.resolve("../src/templates/post/blog.js")
 
-const GET_POSTS = `
+const { blogURI } = require("../globals")
+
+
+const GET_POSTS = (layouts) =>`
     # Here we make use of the imported fragments which are referenced above
     ${FluidImageFragment}
-    ${PostTemplateFragment}
+    ${PostTemplateFragment(layouts)}
     ${BlogPreviewFragment}
 
     query GET_POSTS($first:Int $after:String) {
@@ -61,6 +72,11 @@ const itemsPerPage = 10;
 module.exports = async ({ actions, graphql, reporter }, options) => {
 
   /**
+   * Get all layouts data as a concatenated string
+   */
+  const layoutsData = getAllLayoutsData('Post')
+
+  /**
    * This is the method from Gatsby that we're going
    * to use to create posts in our static site.
    */
@@ -79,7 +95,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
     /**
      * Fetch posts using the GET_POSTS query and the variables passed in.
      */
-    await graphql(GET_POSTS, variables).then(({ data }) => {
+    await graphql(GET_POSTS(layoutsData), variables).then(({ data }) => {
       /**
        * Extract the data from the GraphQL query results
        */
@@ -161,12 +177,55 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
        */
       const path = `${blogURI}/${post.uri}/`
 
-      createPage({
-        path: path,
-        component: postTemplate,
-        context: {
-          post: post,
-        },
+      // createPage({
+      //   path: path,
+      //   component: postTemplate,
+      //   context: {
+      //     post: post,
+      //   },
+      // })
+
+
+
+      /**
+       * Filter out empty objects. This can happen, if for some reason you
+       * don't query for a specific layout (UnionType), that is potentially
+       * there.
+       */
+      const layouts = post.pageBuilder.layouts.filter(el => {
+        return !_isEmpty(el)
+      })
+
+      let mappedLayouts = []
+
+      if (layouts && layouts.length > 0) {
+        /**
+         * Removes all duplicates, as we only need to import each layout once
+         */
+        const UniqueLayouts = _uniqBy(layouts, "fieldGroupName")
+
+        /**
+         * Maps data and prepares object for our template generation.
+         */
+        mappedLayouts = UniqueLayouts.map((layout) => {
+          return {
+            layoutType: layout.fieldGroupName,
+            componentName: layoutMapping('post')[layout.fieldGroupName],
+            filePath: filePathToComponents + layoutMapping('post')[layout.fieldGroupName],
+          }
+        })
+      }
+
+      createPageWithTemplate({
+        createTemplate: createTemplate,
+        templateCacheFolder: templateCacheFolder,
+        pageTemplate: postTemplate,
+        node: post,
+        postType: 'post',
+        pagePath: path,
+        mappedLayouts: mappedLayouts,
+        createPage: createPage,
+        reporter: reporter,
       })
 
       reporter.info(`post created:  ${post.uri}`)
@@ -187,5 +246,6 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
       createPage(blogPage);
       reporter.info(`created blog archive page ${blogPage.context.pageNumber}`);
     });
+
   })
 }

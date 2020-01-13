@@ -1,10 +1,15 @@
-const PostTemplateFragment = `
+const PostTemplateFragment = (layouts, postType) => `
     fragment PostTemplateFragment on WPGraphQL_Post {
         id
         postId
         title
         content
         link
+        pageBuilder {
+            layouts {
+                ${layouts}
+            }
+        }
         featuredImage {
             sourceUrl
             altText
