@@ -105,7 +105,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
   await fetchPages({ first: itemsPerPage, after: null }).then((wpPages) => {
 
     wpPages && wpPages.map((page) => {
-      let pagePath = `/${page.uri}/`
+      let pagePath = `${page.uri}`
 
       /**
        * If the page is the front page, the page path should not be the uri,

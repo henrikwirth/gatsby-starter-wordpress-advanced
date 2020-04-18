@@ -5,6 +5,7 @@ const PageTemplateFragment = `
         pageId
         content
         uri
+        slug
         isFrontPage
         featuredImage {
             sourceUrl
