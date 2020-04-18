@@ -14,7 +14,7 @@ const pageTemplate = require.resolve("../src/templates/page/template.js")
 const GET_PAGES = (layouts) => `
     ${FluidImageFragment}
     ${PageTemplateFragment(layouts)}
-    
+
     query GET_PAGES($first:Int $after:String) {
         wpgraphql {
             pages(
@@ -29,7 +29,7 @@ const GET_PAGES = (layouts) => `
                     hasNextPage
                     endCursor
                 }
-                nodes {                
+                nodes {
                   ...PageTemplateFragment
                 }
             }
@@ -118,7 +118,9 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
   await fetchPages({ first: itemsPerPage, after: null }).then((wpPages) => {
 
     wpPages && wpPages.map((page) => {
-      let pagePath = `/${page.uri}/`
+      let pagePath = `${page.uri}`
+
+      reporter.info(page.uri)
 
       /**
        * If the page is the front page, the page path should not be the uri,

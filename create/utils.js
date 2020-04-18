@@ -34,7 +34,9 @@ module.exports.createTemplate = ({ templateCacheFolderPath, templatePath, templa
     fs.mkdir(templateCacheFolderPath, { recursive: true }, (err) => {
       if (err) throw "Error creating template-cache folder: " + err
 
-      const filePath = templateCacheFolderPath + "/" + templateName + ".js"
+      const filePath = templateCacheFolderPath + "/" + (templateName === "/" ? "frontPage" : templateName) + ".js"
+
+      console.log(filePath)
 
       fs.writeFile(filePath, contents, "utf8", err => {
         if (err) throw "Error writing " + templateName + " template: " + err
@@ -50,7 +52,6 @@ module.exports.createTemplate = ({ templateCacheFolderPath, templatePath, templa
  * Creates pages out of the temporary created templates.
  */
 module.exports.createPageWithTemplate = ({ createTemplate, templateCacheFolder, pageTemplate, page, pagePath, mappedLayouts, createPage, reporter }) => {
-
   /**
    * First we create a new template file for each page.
    */
@@ -58,7 +59,7 @@ module.exports.createPageWithTemplate = ({ createTemplate, templateCacheFolder, 
     {
       templateCacheFolderPath: templateCacheFolder,
       templatePath: pageTemplate,
-      templateName: "tmp-" + page.uri,
+      templateName: "tmp-" + page.slug,
       imports: mappedLayouts,
     }).then(() => {
 
@@ -67,7 +68,7 @@ module.exports.createPageWithTemplate = ({ createTemplate, templateCacheFolder, 
      */
     createPage({
       path: pagePath,
-      component: path.resolve(templateCacheFolder + "/" + "tmp-" + page.uri + ".js"),
+      component: path.resolve(templateCacheFolder + "/" + "tmp-" + page.slug + ".js"),
       context: {
         page: page,
       },

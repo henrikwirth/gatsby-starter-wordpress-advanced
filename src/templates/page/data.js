@@ -6,6 +6,7 @@ const PageTemplateFragment = (layouts) => `
         pageId
         content
         uri
+        slug
         isFrontPage
         featuredImage {
             sourceUrl

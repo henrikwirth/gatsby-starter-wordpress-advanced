@@ -31,12 +31,12 @@ const GET_POSTS = `
                     hasNextPage
                     endCursor
                 }
-                nodes {           
-                    uri     
-                    
+                nodes {
+                    uri
+
                     # This is the fragment used for the Post Template
                     ...PostTemplateFragment
-                    
+
                     #This is the fragment used for the blog preview on archive pages
                     ...BlogPreviewFragment
                 }
@@ -159,7 +159,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
       /**
        * Build post path based of theme blogURI setting.
        */
-      const path = `${blogURI}/${post.uri}/`
+      const path = `${blogURI}${post.uri}`
 
       createPage({
         path: path,
