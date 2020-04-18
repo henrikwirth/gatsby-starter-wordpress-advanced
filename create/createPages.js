@@ -120,8 +120,6 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
     wpPages && wpPages.map((page) => {
       let pagePath = `${page.uri}`
 
-      reporter.info(page.uri)
-
       /**
        * If the page is the front page, the page path should not be the uri,
        * but the root path '/'.
