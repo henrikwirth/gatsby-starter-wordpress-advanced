@@ -175,7 +175,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
       /**
        * Build post path based of theme blogURI setting.
        */
-      const path = `${blogURI}/${post.uri}/`
+      const path = `${blogURI}${post.uri}`
 
       // createPage({
       //   path: path,
@@ -228,7 +228,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         reporter: reporter,
       })
 
-      reporter.info(`post created:  ${post.uri}`)
+      reporter.info(`post created:  ${path}`)
     })
 
     reporter.info(`# -----> POSTS TOTAL: ${wpPosts.length}`)

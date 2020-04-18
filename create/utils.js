@@ -58,7 +58,7 @@ module.exports.createPageWithTemplate = ({ createTemplate, templateCacheFolder, 
     {
       templateCacheFolderPath: templateCacheFolder,
       templatePath: pageTemplate,
-      templateName: "tmp-" + node.uri,
+      templateName: "tmp-" + node.slug,
       imports: mappedLayouts,
     }).then(() => {
 
@@ -67,7 +67,7 @@ module.exports.createPageWithTemplate = ({ createTemplate, templateCacheFolder, 
      */
     createPage({
       path: pagePath,
-      component: path.resolve(templateCacheFolder + "/" + "tmp-" + node.uri + ".js"),
+      component: path.resolve(templateCacheFolder + "/" + "tmp-" + node.slug + ".js"),
       context: {
         [postType]: node,
       },
