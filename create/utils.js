@@ -34,7 +34,7 @@ module.exports.createTemplate = ({ templateCacheFolderPath, templatePath, templa
     fs.mkdir(templateCacheFolderPath, { recursive: true }, (err) => {
       if (err) throw "Error creating template-cache folder: " + err
 
-      const filePath = templateCacheFolderPath + "/" + templateName + ".js"
+      const filePath = templateCacheFolderPath + "/" + ((templateName === "/" || templateName === "") ? "home" : templateName) + ".js"
 
       fs.writeFile(filePath, contents, "utf8", err => {
         if (err) throw "Error writing " + templateName + " template: " + err
