@@ -165,7 +165,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         },
       })
 
-      reporter.info(`post created:  ${post.path}`)
+      reporter.info(`post created:  ${path}`)
     })
 
     reporter.info(`# -----> POSTS TOTAL: ${wpPosts.length}`)
