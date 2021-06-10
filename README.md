@@ -1,5 +1,10 @@
 # Guide to Gatsby WordPress Starter Advanced with Previews, i18n and more - Overview
 
+:red_circle:
+**This repository is based on an older stack. I would recommend checking out https://github.com/henrikwirth/gatsby-starter-wordpress-twenty-twenty instead for a more up to date version. There could still be some learnings in this project, therefore I will just archive it.** 
+:red_circle:
+
+
 Link to tutorial: [Guide to Gatsby WordPress Starter Advanced with Previews, i18n and more - Overview](https://dev.to/nevernull/overview-guide-to-gatsby-wordpress-starter-advanced-with-previews-i18n-and-more-583l)
 
 ## Tutorial Outline
